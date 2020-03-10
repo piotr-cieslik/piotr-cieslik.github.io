@@ -1,5 +1,4 @@
 theme: minima
 title: C# / ML.NET
-author:
-  name: Piotr Cieślik
-  email: test@email.com
+author: Piotr Cieślik
+email: test@email.com
