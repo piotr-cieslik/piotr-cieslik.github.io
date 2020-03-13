@@ -97,10 +97,7 @@ Frequency=1757815 Hz, Resolution=568.8881 ns, Timer=TSC
 .NET Core SDK=2.1.402
   [Host] : .NET Core 2.1.4 (CoreCLR 4.6.26814.03, CoreFX 4.6.26814.02), 64bit RyuJIT
   Core   : .NET Core 2.1.4 (CoreCLR 4.6.26814.03, CoreFX 4.6.26814.02), 64bit RyuJIT
-
 Job=Core  Runtime=Core  
-
-```
 |                                                           Method |       Mean |     Error |    StdDev |        Max |        Min | Iterations |
 |----------------------------------------------------------------- |-----------:|----------:|----------:|-----------:|-----------:|-----------:|
 |                CompareStructureWithDefaultEqualsByInstanceMethod | 339.468 ns | 5.9223 ns | 5.5397 ns | 351.314 ns | 332.248 ns |      15.00 |
