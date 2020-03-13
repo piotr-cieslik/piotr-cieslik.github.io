@@ -89,17 +89,18 @@ Reasumując:
 - porównanie z wykorzystanie domyślnego *equality comparer* dla typu jest szybsze niż porównanie za pomocą statycznej metody `Equals(object objA, object objB)`.
 
 # Pełne wyniki badania
-``` ini
-
+```
 BenchmarkDotNet=v0.11.1, OS=Windows 10.0.17134.285 (1803/April2018Update/Redstone4)
 Intel Core i5-8250U CPU 1.60GHz (Max: 1.80GHz) (Kaby Lake R), 1 CPU, 8 logical and 4 physical cores
 Frequency=1757815 Hz, Resolution=568.8881 ns, Timer=TSC
 .NET Core SDK=2.1.402
   [Host] : .NET Core 2.1.4 (CoreCLR 4.6.26814.03, CoreFX 4.6.26814.02), 64bit RyuJIT
   Core   : .NET Core 2.1.4 (CoreCLR 4.6.26814.03, CoreFX 4.6.26814.02), 64bit RyuJIT
-Job=Core  Runtime=Core  
-|                                                           Method |       Mean |     Error |    StdDev |        Max |        Min | Iterations |
-|----------------------------------------------------------------- |-----------:|----------:|----------:|-----------:|-----------:|-----------:|
+Job=Core  Runtime=Core
+```
+
+| Method | Mean | Error | StdDev | Max | Min | Iterations |
+|--------|-----:|------:|-------:|----:|----:|-----------:|
 |                CompareStructureWithDefaultEqualsByInstanceMethod | 339.468 ns | 5.9223 ns | 5.5397 ns | 351.314 ns | 332.248 ns |      15.00 |
 |               CompareStructureWithOverrideEqualsByInstanceMethod |  10.182 ns | 0.1382 ns | 0.1225 ns |  10.451 ns |  10.087 ns |      14.00 |
 |          CompareStructureWithIEquatableInterfaceByInstanceMethod |   1.823 ns | 0.0089 ns | 0.0083 ns |   1.840 ns |   1.810 ns |      15.00 |
