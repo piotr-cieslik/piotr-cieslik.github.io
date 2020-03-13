@@ -186,7 +186,7 @@ Mam nadzieję, że artykuł ten pomógł Ci zrozumieć w jaki sposób efektywnie
 
 ---
 
-1. https://docs.microsoft.com/en-us/dotnet/api/system.object.gethashcode?redirectedfrom=MSDN&view=netframework-4.7#System_Object_GetHashCode
+1. https://docs.microsoft.com/en-us/dotnet/api/system.object.gethashcode
 2. https://stackoverflow.com/questions/371328/why-is-it-important-to-override-gethashcode-when-equals-method-is-overridden
 3. https://stackoverflow.com/questions/102742/why-is-397-used-for-resharper-gethashcode-override
 4. https://stackoverflow.com/questions/263400/what-is-the-best-algorithm-for-an-overridden-system-object-gethashcode/263416#263416

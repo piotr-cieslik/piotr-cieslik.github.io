@@ -123,7 +123,3 @@ Job=Core  Runtime=Core
 |                                      CompareTuplesByStaticMethod |  56.999 ns | 0.3764 ns | 0.3521 ns |  57.529 ns |  56.492 ns |      15.00 |
 |                      CompareValueTuplesByDefaultEqualityComparer |  20.369 ns | 0.2340 ns | 0.2189 ns |  20.869 ns |  20.108 ns |      15.00 |
 |                           CompareTuplesByDefaultEqualityComparer |  55.591 ns | 0.5643 ns | 0.5278 ns |  56.688 ns |  54.995 ns |      15.00 |
-
----
-
-- [https://github.com/piotrprogramuje/Benchmarks](https://github.com/piotrprogramuje/Benchmarks)

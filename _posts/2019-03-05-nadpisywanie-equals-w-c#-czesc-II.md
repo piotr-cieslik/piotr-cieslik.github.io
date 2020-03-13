@@ -157,5 +157,5 @@ Mam nadzieję, że przykład prostego słownika przedstawiony w tym artykule pom
 
 ---
 
-- [https://docs.microsoft.com/pl-pl/dotnet/api/system.object.gethashcode?view=netframework-4.7.1#System_Object_GetHashCode](https://docs.microsoft.com/pl-pl/dotnet/api/system.object.gethashcode?view=netframework-4.7.1#System_Object_GetHashCode)
+- [https://docs.microsoft.com/en-us/dotnet/api/system.object.gethashcode](https://docs.microsoft.com/en-us/dotnet/api/system.object.gethashcode)
 - [https://en.wikipedia.org/wiki/Hash_function](https://en.wikipedia.org/wiki/Hash_function)
