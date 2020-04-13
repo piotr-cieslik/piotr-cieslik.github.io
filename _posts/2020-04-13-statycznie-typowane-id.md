@@ -6,9 +6,9 @@ categories:
 ---
 
 ## Wstęp
-Jedną z standardowych funkcjonalności aplikacji biznesowych jest przechowywanie danych. W programach tworzonych z wykorzystaniem języka C# bardzo często do przechowywania danych stosuje się kombinacje relacyjnej baza danych (np. MS SQL) plus narzędzia ORM pozwalającego na mapowanie danych zawartych w bazie na obiekty (np. Entity Framework).
+Jedną z standardowych funkcjonalności aplikacji biznesowych jest przechowywanie danych. W programach tworzonych z wykorzystaniem języka C# bardzo często do przechowywania danych stosuje się kombinacje relacyjnej bazy danych (np. MS SQL) plus narzędzia ORM pozwalającego na mapowanie danych zawartych w bazie na obiekty (np. Entity Framework).
 
-Informację zawarte w tym artykule bazują głównie na doświadczeniach wyniesionych z wykorzystania bazy danych MS SQL oraz biblioteki Entity Framework. Jestem jednak przekonany, że przedstawione tu podejście jest na tyle uniwersalne, że bez problemu sprawdzi się również w połączeniu z innymi technologiami.
+Informacje zawarte w tym artykule bazują głównie na doświadczeniach wyniesionych z wykorzystania bazy danych MS SQL oraz biblioteki Entity Framework. Jestem jednak przekonany, że przedstawione tu podejście jest na tyle uniwersalne, że bez problemu sprawdzi się również w połączeniu z innymi technologiami.
 
 ## Problem
 Rozważmy dość standardową funkcję, która na podstawie informacji o firmie, osobie oraz zadaniu zwraca detale tego zadania.
@@ -45,7 +45,7 @@ var taskDetails =
         task.Id);
 ```
 
-Jednak z punktu widzenia naszego kompilator nie zmieniło się nic. Nasz program nadal się kompiluje oraz możemy go uruchomić. Jeśli mamy szczęście okaże się, że w naszej bazie danych nie istnieją wpisy odpowiadające wprowadzonej kombinacji `personId` oraz `companyId` i w efekcie zwrócony zostanie brak danych lub rzucony zostanie wyjątek. Gorzej jeśli w naszej bazie istnieją pasujące wpisy. Skutkiem tego nasi klienci mogą zobaczyć informację na temat osób oraz zadań przypisanych do innej firmy. Taki drobny błąd może nas sporo kosztować, łącznie z pozwem ze strony naszych klientów.
+Jednak z punktu widzenia naszego kompilatora nie zmieniło się nic. Nasz program nadal się kompiluje oraz możemy go uruchomić. Jeśli mamy szczęście okaże się, że w naszej bazie danych nie istnieją wpisy odpowiadające wprowadzonej kombinacji `personId` oraz `companyId` i w efekcie zwrócony zostanie brak danych lub rzucony zostanie wyjątek. Gorzej jeśli w naszej bazie istnieją pasujące wpisy. Skutkiem tego nasi klienci mogą zobaczyć informację na temat osób oraz zadań przypisanych do innej firmy. Taki drobny błąd może nas sporo kosztować, łącznie z pozwem ze strony naszych klientów.
 
 Istnieje oczywiście szansa, że błąd ten zostanie wychwycony na etapie testowania aplikacji i wszystko skończy się dobrze. Chciałbym jednak przedstawić rozwiązanie, które pozwoli na wykrycie tego typu problemu wcześniej, już na etapie kompilacji programu.
 
