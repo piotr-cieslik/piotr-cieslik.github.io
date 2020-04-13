@@ -24,7 +24,7 @@ public TaskDetails GetTaskDetails(
 }
 ```
 
-Funkcje takie są dość powszechnym (co nie znaczy, że dobrym) rozwiązaniem i najczęściej występują w klasach implementujących różnego rodzaju "serwisy". Do tej pory wszystko jest ok. Popatrzmy na przykładowe wykorzystanie wspomnianej metody:
+Funkcje takie są dość powszechnym rozwiązaniem i najczęściej występują w klasach implementujących różnego rodzaju "serwisy". Do tej pory wszystko jest ok. Popatrzmy na przykładowe wykorzystanie wspomnianej metody:
 ``` csharp
 var taskDetails =
     GetTaskDetails(
@@ -45,9 +45,9 @@ var taskDetails =
         task.Id);
 ```
 
-Jednak z punktu widzenia naszego kompilator nie zmieniło się nic. Nasz program nadal się kompiluje oraz możemy go uruchomić. Jeśli mamy szczęście okaże się, że w naszej bazie danych nie istnieją wpisy odpowiadające wprowadzonej kombinacji `personId` oraz `companyId` i w efekcie zwrócony zostanie brak danych lub rzucony zostanie wyjątek. Gorzej jeśli w naszej bazie istnieją pasujące wpisy. Skutkiem tego nasi klienci mogą zobaczyć informację na temat osób oraz zadań przypisanych do innej firmy. Takie drobny błąd może spowodować wiele problemów, łącznie z pozwem ze strony naszych klientów.
+Jednak z punktu widzenia naszego kompilator nie zmieniło się nic. Nasz program nadal się kompiluje oraz możemy go uruchomić. Jeśli mamy szczęście okaże się, że w naszej bazie danych nie istnieją wpisy odpowiadające wprowadzonej kombinacji `personId` oraz `companyId` i w efekcie zwrócony zostanie brak danych lub rzucony zostanie wyjątek. Gorzej jeśli w naszej bazie istnieją pasujące wpisy. Skutkiem tego nasi klienci mogą zobaczyć informację na temat osób oraz zadań przypisanych do innej firmy. Taki drobny błąd może nas sporo kosztować, łącznie z pozwem ze strony naszych klientów.
 
-Oczywiście istnieje szansa, że błąd ten zostanie wychwycony na etapie testowania aplikacji i wszystko skończy się dobrze. Chciałbym jednak przedstawić rozwiązanie, które pozwoli na wykrycie tego typu problemu już na etapie kompilacji, co pozwoli błyskawicznie wykryć i naprawić błąd.
+Istnieje oczywiście szansa, że błąd ten zostanie wychwycony na etapie testowania aplikacji i wszystko skończy się dobrze. Chciałbym jednak przedstawić rozwiązanie, które pozwoli na wykrycie tego typu problemu wcześniej, już na etapie kompilacji programu.
 
 ## Rozwiązanie
 Zamiast reprezentować wartości pól *Id* poszczególnych elementów za pomocą typu `int` zdefiniujmy w tym celu własne typy danych. Nazwijmy je:
@@ -55,11 +55,11 @@ Zamiast reprezentować wartości pól *Id* poszczególnych elementów za pomocą
 - `PersonId`,
 - `TaskId`.
 
-Jednak zanim to zrobimy zastanówmy się przez chwilę jakie właściwości powinny mieś powyższe typy, aby mogły być w wygodny sposób wykorzystywane jako *Id* elementów. W mojej ocenie powinny być one:
+Jednak zanim to zrobimy zastanówmy się przez chwilę jakie właściwości powinny mieś powyższe typy aby mogły być w wygodny sposób wykorzystywane jako *Id* elementów. W mojej ocenie powinny być one:
 - niezmienne,
 - pozwalać na porównywanie za pomocą metody `Equals` oraz operatorów `==` i `!=`.
 
-Mając na uwadze powyższe właściwości, oto przykładowa implementacja typu `CompanyId`:
+Mając na uwadze powyższe właściwości, przykładowa implementacja typu `CompanyId` może wyglądać tak:
 ``` csharp
 public sealed class CompanyId : IEquatable<CompanyId>
 {
@@ -107,7 +107,7 @@ Error    CS1503    Argument 2: cannot convert from 'CompanyId' to 'PersonId'
 ```
 
 ## Efekt skali
-Początkowo zdefiniowanie własnych typów reprezentujących ID elementów może wydawać się sztuczne i powodujące sporo problemów. Tym bardziej, że będą istniały miejsca, w których konieczna będzie ręczna konwersja opakowanego typu (`int`/`string`/`Guid`/...) na nasz typ
+Początkowo zdefiniowanie własnych typów reprezentujących ID elementów może wydawać się sztuczne i powodujące sporo problemów. Tym bardziej, że będą istniały miejsca, w których konieczna będzie ręczna konwersja "opakowanego" typu (`int`/`string`/`Guid`/...) na zdefiniowany przez nas typ
 ``` csharp
 var stronglyTypedPersonId = new PersonId(personId);
 ```
@@ -117,10 +117,10 @@ oraz konwersja w drugą stronę
 var personId = stronglyTypedPersonId.Value();
 ```
 
-Jeśli jednak będziemy konsekwentnie korzystać z naszych nowych typów, wyprą one praktycznie całkowicie wykorzystanie innych typów.
+Jeśli jednak będziemy konsekwentnie korzystać z naszych nowych typów wyprą one, praktycznie całkowicie, wykorzystanie innych typów.
 
 ## Klucze typu String, Guid, ...
-Nic nie stoi na przeszkodzie aby przedstawione rozwiązanie zastosować do reprezentacji *Id* innego typu niż `int`. Przykładowo gdyby klucz identyfikujący osobę w naszym systemie był typ `string`, jak ma to miejsce w przypadku *Identity Framework*, nasz typ `PersonId` mógłby wyglądać tak:
+Nic nie stoi na przeszkodzie aby przedstawione rozwiązanie zastosować do reprezentacji *Id* innego typu niż `int`. Przykładowo gdy kluczem identyfikującym osobę w naszym systemie jest typ `string`, jak ma to miejsce w przypadku Identity Framework, nasz typ `PersonId` może wyglądać tak:
 
 ``` csharp
 public sealed class PersonId : IEquatable<PersonId>
@@ -142,7 +142,7 @@ public sealed class PersonId : IEquatable<PersonId>
 ```
 
 ## Złożone klucze
-Zdefiniowanie własnego typu reprezentującego *Id* sprawdza się również, w przypadku gdy nasz klucz składa się z więcej niż jedna wartość.
+Zdefiniowanie własnego typu reprezentującego *Id* sprawdza się również, w przypadku gdy nasz klucz składa się z więcej niż jednej wartość.
 
 Przykładowo definiując jako identyfikator pracownika parę wartości (osoba, firma), możemy zdefiniować typ `EmployeeId` w następujący sposób:
 
@@ -189,9 +189,9 @@ Gdyby w powyższym przykładzie typ `PersonId` był strukturą otrzymałbym wart
 Wybór pomiędzy klasą a strukturą zależy w dużej mierze od domeny aplikacji oraz preferencji programistów. Jedyne co mogę polecić w to miejscu to być konsekwentnym i trzymać się wybranej opcji w całym programie.
 
 ## Podsumowanie
-Zaletą przedstawionego rozwiązania jest jego prostota oraz niewiele kodu, który musimy napisać. Wystarczy, że zdefiniujemy nasz typ raz (przykładowo podczas dodawania nowej encji do systemu), a następnie możemy korzystać z niego tak samo jak w przypadku typów `int`, `string`, `Guid`, ...
+Zaletą przedstawionego rozwiązania jest jego prostota oraz niewiele dodatkowego kodu, który musi zostać napisany. Wystarczy, że zdefiniujemy nasz typ raz (przykładowo podczas dodawania nowej encji do systemu) a następnie możemy korzystać z niego tak samo jak w przypadku typów `int`, `string`, `Guid`, ...
 
-Przedstawione tu rozwiązanie nie jest rozwiązaniem jedynie teoretycznym. Zostało ono z sukcesem wprowadzone do dwóch dość sporych systemów.
+Przedstawione tu rozwiązanie nie jest rozwiązaniem jedynie teoretycznym. Zostało ono z sukcesem wprowadzone do dwóch średniej wielkości systemów.
 
 Zachęcam Cię serdecznie do jego przetestowania.
 
