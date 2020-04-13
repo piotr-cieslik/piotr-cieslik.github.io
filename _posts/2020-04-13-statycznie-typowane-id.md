@@ -196,4 +196,4 @@ Przedstawione tu rozwiązanie nie jest rozwiązaniem jedynie teoretycznym. Zosta
 Zachęcam Cię serdecznie do jego przetestowania.
 
 ---
-- [https://github.com/piotr-cieslik/Blog.StaticallyTypedIds] (https://github.com/piotr-cieslik/Blog.StaticallyTypedIds)
+- [https://github.com/piotr-cieslik/Blog.StaticallyTypedIds](https://github.com/piotr-cieslik/Blog.StaticallyTypedIds)
