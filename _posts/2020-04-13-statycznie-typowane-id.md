@@ -1,0 +1,199 @@
+---
+layout: post
+title: "Statycznie typowane Id"
+date: 2020-04-13
+categories:
+---
+
+## Wstęp
+Jedną z standardowych funkcjonalności aplikacji biznesowych jest przechowywanie danych. W programach tworzonych z wykorzystaniem języka C# bardzo często do przechowywania danych stosuje się kombinacje relacyjnej baza danych (np. MS SQL) plus narzędzia ORM pozwalającego na mapowanie danych zawartych w bazie na obiekty (np. Entity Framework).
+
+Informację zawarte w tym artykule bazują głównie na doświadczeniach wyniesionych z wykorzystania bazy danych MS SQL oraz biblioteki Entity Framework. Jestem jednak przekonany, że przedstawione tu podejście jest na tyle uniwersalne, że bez problemu sprawdzi się również w połączeniu z innymi technologiami.
+
+## Problem
+Rozważmy dość standardową funkcję, która na podstawie informacji o firmie, osobie oraz zadaniu zwraca detale tego zadania.
+
+```
+public TaskDetails GetTaskDetails(
+    int companyId,
+    int personId,
+    int taskId)
+{
+    // Implementation here.
+    throw new NotImplementedException();
+}
+```
+
+Funkcje takie są dość powszechnym (co nie znaczy, że dobrym) rozwiązaniem i najczęściej występują w klasach implementujących różnego rodzaju "serwisy". Do tej pory wszystko jest ok. Popatrzmy na przykładowe wykorzystanie wspomnianej metody:
+```
+var taskDetails =
+	GetTaskDetails(
+		company.Id,
+		person.Id,
+		task.Id);
+```
+
+Co się jednak stanie, gdy z jakiegoś powodu pomylimy kolejność przekazywanych argumentów? Przykładowo zamieńmy miejscami `personId` oraz `companyId`. Z punktu widzenia logiki biznesowej pomieszaliśmy przysłowiowe jabłka z gruszkami. Nie ma sensu identyfikowania firmy po numerze osoby, podobnie jak bez sensu jest identyfikowanie osoby po numerze firmy. 
+
+*Pomińmy proszę przypadek jednoosobowych działalności gospodarczych :)*
+
+```
+var taskDetails =
+	GetTaskDetails(
+		person.Id,
+		company.Id,
+		task.Id);
+```
+
+Jednak z punktu widzenia naszego kompilator nie zmieniło się nic. Nasz program nadal się kompiluje oraz możemy go uruchomić. Jeśli mamy szczęście okaże się, że w naszej bazie danych nie istnieją wpisy odpowiadające wprowadzonej kombinacji `personId` oraz `companyId` i w efekcie zwrócony zostanie brak danych lub rzucony zostanie wyjątek. Gorzej jeśli w naszej bazie istnieją pasujące wpisy. Skutkiem tego nasi klienci mogą zobaczyć informację na temat osób oraz zadań przypisanych do innej firmy. Takie drobny błąd może spowodować wiele problemów, łącznie z pozwem ze strony naszych klientów.
+
+Oczywiście istnieje szansa, że błąd ten zostanie wychwycony na etapie testowania aplikacji i wszystko skończy się dobrze. Chciałbym jednak przedstawić rozwiązanie, które pozwoli na wykrycie tego typu problemu już na etapie kompilacji, co pozwoli błyskawicznie wykryć i naprawić błąd.
+
+## Rozwiązanie
+Zamiast reprezentować wartości pól *Id* poszczególnych elementów za pomocą typu `int` zdefiniujmy w tym celu własne typy danych. Nazwijmy je:
+- `CompanyId`,
+- `PersonId`,
+- `TaskId`.
+
+Jednak zanim to zrobimy zastanówmy się przez chwilę jakie właściwości powinny mieś powyższe typy, aby mogły być w wygodny sposób wykorzystywane jako *Id* elementów. W mojej ocenie powinny być one:
+- niezmienne,
+- pozwalać na porównywanie za pomocą metody `Equals` oraz operatorów `==` i `!=`.
+
+Mając na uwadze powyższe właściwości, oto przykładowa implementacja typu `CompanyId`:
+``` csharp
+public sealed class CompanyId : IEquatable<CompanyId>
+{
+    public CompanyId(int value) => Value = value;
+
+    public int Value { get; }
+
+    public override bool Equals(object obj) => Equals(obj as CompanyId);
+
+    public bool Equals(CompanyId other) => other != null && Value == other.Value;
+
+    public override int GetHashCode() => HashCode.Combine(Value);
+
+    public static bool operator ==(CompanyId left, CompanyId right) => EqualityComparer<CompanyId>.Default.Equals(left, right);
+
+    public static bool operator !=(CompanyId left, CompanyId right) => !(left == right);
+}
+```
+
+Typy `PersonId` oraz `ContractorId` mogą być zdefiniowane w analogiczny sposób. Pełna implementacja znajduje się na w podlinkowanym repozytorium na GitHub.
+
+Warto w tym miejscu zauważyć, że nowe wersję Visual Studio pozwalają na automatyczną implementację interfejsu `IEquatable<T>`. Wystarczy zdefiniować swój własny typ, a następnie:
+- najechać kursorem na jego nazwę,
+- nacisnąć kombinację przycisków *CTRL + .*,
+- z menu kontekstowego wybrać opcję "Generate Equals and GetHashCode...".
+
+Mając zdefiniowane własne typy, możemy wykorzystać je jako parametry metody `GetTaskDetails`:
+
+```
+public TaskDetails GetTaskDetails(
+    CompanyId companyId,
+    PersonId personId,
+    TaskId taskId)
+{
+    // Implementation here.
+    throw new NotImplementedException();
+}
+```
+
+W tym momencie zamiana miejscami `companyId` oraz `personId` spowoduje błąd kompilacji.
+
+```
+Error	CS1503	Argument 1: cannot convert from 'PersonId' to 'CompanyId'
+Error	CS1503	Argument 2: cannot convert from 'CompanyId' to 'PersonId'	
+```
+
+## Efekt skali
+Początkowo zdefiniowanie własnych typów reprezentujących ID elementów może wydawać się sztuczne i powodujące sporo problemów. Tym bardziej, że będą istniały miejsca, w których konieczna będzie ręczna konwersja opakowanego typu (`int`/`string`/`Guid`/...) na nasz typ
+``` csharp
+var stronglyTypedPersonId = new PersonId(personId);
+```
+
+oraz konwersja w drugą stronę
+``` csharp
+var personId = stronglyTypedPersonId.Value();
+```
+
+Jeśli jednak będziemy konsekwentnie korzystać z naszych nowych typów, wyprą one praktycznie całkowicie wykorzystanie innych typów.
+
+## Klucze typu String, Guid, ...
+Nic nie stoi na przeszkodzie aby przedstawione rozwiązanie zastosować do reprezentacji *Id* innego typu niż `int`. Przykładowo gdyby klucz identyfikujący osobę w naszym systemie był typ `string`, jak ma to miejsce w przypadku *Identity Framework*, nasz typ `PersonId` mógłby wyglądać tak:
+
+``` csharp
+public sealed class PersonId : IEquatable<PersonId>
+{
+    public PersonId(string value) => Value = value;
+
+    public string Value { get; }
+
+    public override bool Equals(object obj) => Equals(obj as PersonId);
+
+    public bool Equals(PersonId other) => other != null && Value == other.Value;
+
+    public override int GetHashCode() => HashCode.Combine(Value);
+
+    public static bool operator ==(PersonId left, PersonId right) => EqualityComparer<PersonId>.Default.Equals(left, right);
+
+    public static bool operator !=(PersonId left, PersonId right) => !(left == right);
+}
+```
+
+## Złożone klucze
+Zdefiniowanie własnego typu reprezentującego *Id* sprawdza się również, w przypadku gdy nasz klucz składa się z więcej niż jedna wartość.
+
+Przykładowo definiując jako identyfikator pracownika parę wartości (osoba, firma), możemy zdefiniować typ `EmployeeId` w następujący sposób:
+
+``` csharp
+public sealed class EmployeeId : IEquatable<EmployeeId>
+{
+    public EmployeeId(
+        CompanyId companyId,
+        PersonId personId)
+    {
+        CompanyId = companyId;
+        PersonId = personId;
+    }
+
+    public CompanyId CompanyId { get; }
+
+    public PersonId PersonId { get; }
+
+    public override bool Equals(object obj) => Equals(obj as EmployeeId);
+
+    public bool Equals(EmployeeId other) =>
+        other != null &&
+            Equals(CompanyId, other.CompanyId) &&
+            Equals(PersonId, other.PersonId);
+
+    public override int GetHashCode() => HashCode.Combine(CompanyId, PersonId);
+
+    public static bool operator ==(EmployeeId left, EmployeeId right) => EqualityComparer<EmployeeId>.Default.Equals(left, right);
+
+    public static bool operator !=(EmployeeId left, EmployeeId right) => !(left == right);
+}
+```
+
+## Klasa czy struktura?
+Niestety nie znam odpowiedzi na to pytanie. Osobiście definiuję  typy reprezentujące *Id* jako klasy. Wynika to jedynie z faktu, że domyślną wartością dla klasy (typ referencyjny) jest `null`. Jeśli w jakimś miejscu otrzymam domyślną wartość dla mojego typu, próba wyciągnięcia przechowywanej przez niego wartości skończy się rzuceniem wyjątku.
+
+```
+var personId = default(PersonId);
+var value = personId.Value(); // Null reference exception
+```
+
+Gdyby w powyższym przykładzie typ `PersonId` był strukturą otrzymałbym wartość `0`, co potencjalnie może prowadzić do trudnych w odnalezieniu błędów. 
+
+Wybór pomiędzy klasą a strukturą zależy w dużej mierze od domeny aplikacji oraz preferencji programistów. Jedyne co mogę polecić w to miejscu to być konsekwentnym i trzymać się wybranej opcji w całym programie.
+
+## Podsumowanie
+Zaletą przedstawionego rozwiązania jest jego prostota oraz niewiele kodu, który musimy napisać. Wystarczy, że zdefiniujemy nasz typ raz (przykładowo podczas dodawania nowej encji do systemu), a następnie możemy korzystać z niego tak samo jak w przypadku typów `int`, `string`, `Guid`, ...
+
+Przedstawione tu rozwiązanie nie jest rozwiązaniem jedynie teoretycznym. Zostało ono z sukcesem wprowadzone do dwóch dość sporych systemów.
+
+Zachęcam Cię serdecznie do jego przetestowania.
+
+---
+- [https://github.com/piotr-cieslik/Blog.StaticallyTypedIds] (https://github.com/piotr-cieslik/Blog.StaticallyTypedIds)
