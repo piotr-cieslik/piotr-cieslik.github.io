@@ -1,4 +1,4 @@
-theme: minima
+remote_theme: "mmistakes/minimal-mistakes@4.19.1"
 title: Ten o programowaniu w C#
 header_pages:
   - about.md
