@@ -27,10 +27,10 @@ public TaskDetails GetTaskDetails(
 Funkcje takie są dość powszechnym (co nie znaczy, że dobrym) rozwiązaniem i najczęściej występują w klasach implementujących różnego rodzaju "serwisy". Do tej pory wszystko jest ok. Popatrzmy na przykładowe wykorzystanie wspomnianej metody:
 ``` csharp
 var taskDetails =
-	GetTaskDetails(
-		company.Id,
-		person.Id,
-		task.Id);
+    GetTaskDetails(
+        company.Id,
+        person.Id,
+        task.Id);
 ```
 
 Co się jednak stanie, gdy z jakiegoś powodu pomylimy kolejność przekazywanych argumentów? Przykładowo zamieńmy miejscami `personId` oraz `companyId`. Z punktu widzenia logiki biznesowej pomieszaliśmy przysłowiowe jabłka z gruszkami. Nie ma sensu identyfikowania firmy po numerze osoby, podobnie jak bez sensu jest identyfikowanie osoby po numerze firmy. 
@@ -39,10 +39,10 @@ Co się jednak stanie, gdy z jakiegoś powodu pomylimy kolejność przekazywanyc
 
 ``` csharp
 var taskDetails =
-	GetTaskDetails(
-		person.Id,
-		company.Id,
-		task.Id);
+    GetTaskDetails(
+        person.Id,
+        company.Id,
+        task.Id);
 ```
 
 Jednak z punktu widzenia naszego kompilator nie zmieniło się nic. Nasz program nadal się kompiluje oraz możemy go uruchomić. Jeśli mamy szczęście okaże się, że w naszej bazie danych nie istnieją wpisy odpowiadające wprowadzonej kombinacji `personId` oraz `companyId` i w efekcie zwrócony zostanie brak danych lub rzucony zostanie wyjątek. Gorzej jeśli w naszej bazie istnieją pasujące wpisy. Skutkiem tego nasi klienci mogą zobaczyć informację na temat osób oraz zadań przypisanych do innej firmy. Takie drobny błąd może spowodować wiele problemów, łącznie z pozwem ze strony naszych klientów.
@@ -102,8 +102,8 @@ public TaskDetails GetTaskDetails(
 W tym momencie zamiana miejscami `companyId` oraz `personId` spowoduje błąd kompilacji.
 
 ``` csharp
-Error	CS1503	Argument 1: cannot convert from 'PersonId' to 'CompanyId'
-Error	CS1503	Argument 2: cannot convert from 'CompanyId' to 'PersonId'	
+Error    CS1503    Argument 1: cannot convert from 'PersonId' to 'CompanyId'
+Error    CS1503    Argument 2: cannot convert from 'CompanyId' to 'PersonId'    
 ```
 
 ## Efekt skali
