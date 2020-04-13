@@ -13,7 +13,7 @@ Informację zawarte w tym artykule bazują głównie na doświadczeniach wyniesi
 ## Problem
 Rozważmy dość standardową funkcję, która na podstawie informacji o firmie, osobie oraz zadaniu zwraca detale tego zadania.
 
-```
+``` csharp
 public TaskDetails GetTaskDetails(
     int companyId,
     int personId,
@@ -25,7 +25,7 @@ public TaskDetails GetTaskDetails(
 ```
 
 Funkcje takie są dość powszechnym (co nie znaczy, że dobrym) rozwiązaniem i najczęściej występują w klasach implementujących różnego rodzaju "serwisy". Do tej pory wszystko jest ok. Popatrzmy na przykładowe wykorzystanie wspomnianej metody:
-```
+``` csharp
 var taskDetails =
 	GetTaskDetails(
 		company.Id,
@@ -37,7 +37,7 @@ Co się jednak stanie, gdy z jakiegoś powodu pomylimy kolejność przekazywanyc
 
 *Pomińmy proszę przypadek jednoosobowych działalności gospodarczych :)*
 
-```
+``` csharp
 var taskDetails =
 	GetTaskDetails(
 		person.Id,
@@ -88,7 +88,7 @@ Warto w tym miejscu zauważyć, że nowe wersję Visual Studio pozwalają na aut
 
 Mając zdefiniowane własne typy, możemy wykorzystać je jako parametry metody `GetTaskDetails`:
 
-```
+``` csharp
 public TaskDetails GetTaskDetails(
     CompanyId companyId,
     PersonId personId,
@@ -101,7 +101,7 @@ public TaskDetails GetTaskDetails(
 
 W tym momencie zamiana miejscami `companyId` oraz `personId` spowoduje błąd kompilacji.
 
-```
+``` csharp
 Error	CS1503	Argument 1: cannot convert from 'PersonId' to 'CompanyId'
 Error	CS1503	Argument 2: cannot convert from 'CompanyId' to 'PersonId'	
 ```
@@ -179,7 +179,7 @@ public sealed class EmployeeId : IEquatable<EmployeeId>
 ## Klasa czy struktura?
 Niestety nie znam odpowiedzi na to pytanie. Osobiście definiuję  typy reprezentujące *Id* jako klasy. Wynika to jedynie z faktu, że domyślną wartością dla klasy (typ referencyjny) jest `null`. Jeśli w jakimś miejscu otrzymam domyślną wartość dla mojego typu, próba wyciągnięcia przechowywanej przez niego wartości skończy się rzuceniem wyjątku.
 
-```
+``` csharp
 var personId = default(PersonId);
 var value = personId.Value(); // Null reference exception
 ```
