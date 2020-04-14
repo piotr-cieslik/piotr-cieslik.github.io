@@ -1,8 +1,69 @@
-theme: minima
-title: Ten o programowaniu w C#
-header_pages:
-  - about.md
-author: Piotr Cieślik
-email: kontakt@piotrcieslik.pl
+# Created based on https://github.com/mmistakes/mm-github-pages-starter/blob/master/_config.yml
+
+# Site settings
+title: "Ten o programowaniu"
+email: "kontakt@piotrcieslik.pl"
+description: ""
+github_username: "piotr-cieslik"
+url: "https://piotrcieslik.pl"
+repository: "piotr-cieslik/piotr-cieslik.github.io"
+search: true
+paginate: 5
 google_analytics: UA-160663764-1
-github_username: piotr-cieslik
+
+# Build settings
+markdown: kramdown
+remote_theme: "mmistakes/minimal-mistakes"
+locale: "pl-PL"
+
+include:
+  - _pages
+  
+plugins:
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
+
+author:
+  name: "Piotr Cieślik"
+#  avatar: ""
+  bio: ""
+  location: "Warszawa, Polska"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/piotr-cieslik"
+
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/piotr-cieslik"
+
+# Default settings for post and pages.
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: false
+      share: false
+      related: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: true
+
+
+
+
