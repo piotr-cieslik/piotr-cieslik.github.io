@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Nadpisywanie Equals w C# - część II"
 date: 2019-03-05
-categories: C#
 ---
 
 Artykuły wchodzące w skład serii:

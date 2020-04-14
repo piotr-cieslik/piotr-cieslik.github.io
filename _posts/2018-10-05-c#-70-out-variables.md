@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "C# 7.0 - out variables"
 date: 2018-10-05
-categories: C#
 ---
 
 W poprzednich wersjach C# przekazanie do funkcji argumentu z wykorzystaniem słowa kluczowego `out` wymagało wcześniejszej deklaracji zmiennej.

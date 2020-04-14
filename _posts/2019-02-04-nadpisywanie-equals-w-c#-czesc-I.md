@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Nadpisywanie Equals w C# - część I"
 date: 2019-02-04
-categories: C#
 ---
 
 Chciałbym, aby ten pięcioczęściowy artykuł był podsumowaniem tego, czego dowiedziałem się na temat nadpisywania metody `Equals` w C#. Mam nadzieję, że zawarta tu wiedza przyda się także i Tobie.

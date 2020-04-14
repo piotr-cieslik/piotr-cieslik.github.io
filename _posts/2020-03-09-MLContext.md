@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "MLContext"
 date: 2020-03-09
-categories: ml.net
 ---
 
 *Wpis został stworzony na bazie ML.NET w wersji 1.4*

@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Statycznie typowane Id"
 date: 2020-04-13
-categories:
 ---
 
 ## Wstęp

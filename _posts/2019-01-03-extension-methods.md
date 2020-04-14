@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Extension methods"
 date: 2019-01-03
-categories: C#
 ---
 
 

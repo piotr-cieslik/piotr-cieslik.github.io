@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Dlaczego null jest zły"
 date: 2018-09-13
-categories: C#
 ---
 
 Zacznijmy od przykładu.

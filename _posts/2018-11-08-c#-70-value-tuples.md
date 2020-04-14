@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "C# 7.0 - value tuples"
 date: 2018-11-08
-categories: C#
 ---
 
 Chcąc omówić wprowadzone razem z C# 7.0 generyczne typy `ValueTuple<T>` warto przypomnieć czym właściwie jest struktura danych Tuple oraz opisać jej implementację w środowisku .Net.
