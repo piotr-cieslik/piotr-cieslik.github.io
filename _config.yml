@@ -1,11 +1,8 @@
-remote_theme: "mmistakes/minimal-mistakes"
-plugins:
-  - jekyll-include-cache
+theme: minima
 title: Ten o programowaniu w C#
 header_pages:
   - about.md
-author:
-  name: Piotr Cieślik
-  email: kontakt@piotrcieslik.pl
+author: Piotr Cieślik
+email: kontakt@piotrcieslik.pl
 google_analytics: UA-160663764-1
 github_username: piotr-cieslik
