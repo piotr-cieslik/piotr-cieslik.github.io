@@ -1,8 +1,11 @@
 remote_theme: "poole/hyde"
 title: Ten o programowaniu w C#
+url: https://piotrcieslik.pl
+baseurl: /
 header_pages:
   - about.md
-author: Piotr Cieślik
-email: kontakt@piotrcieslik.pl
+author:
+  name: Piotr Cieślik
+  email: kontakt@piotrcieslik.pl
 google_analytics: UA-160663764-1
 github_username: piotr-cieslik
