@@ -16,8 +16,7 @@ markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes"
 locale: "pl-PL"
 
-include:
-  - _pages
+include: ["_pages"]
   
 plugins:
   - jekyll-paginate
@@ -58,7 +57,7 @@ defaults:
       related: true
   # _pages
   - scope:
-      path: ""
+      path: "_pages"
       type: pages
     values:
       layout: single
