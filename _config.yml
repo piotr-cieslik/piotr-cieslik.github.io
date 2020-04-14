@@ -1,7 +1,5 @@
-remote_theme: "poole/hyde"
+remote_theme: "mmistakes/minimal-mistakes"
 title: Ten o programowaniu w C#
-url: https://piotrcieslik.pl
-baseurl: /
 header_pages:
   - about.md
 author:
