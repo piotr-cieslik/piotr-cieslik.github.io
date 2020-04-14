@@ -1,4 +1,6 @@
 remote_theme: "mmistakes/minimal-mistakes"
+plugins:
+  - jekyll-include-cache
 title: Ten o programowaniu w C#
 header_pages:
   - about.md
