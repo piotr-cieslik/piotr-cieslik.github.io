@@ -40,6 +40,9 @@ author:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/piotr-cieslik"
+    - label: "kontakt@piotrcieslik.pl"
+      icon: "fas fa-fw fa-at"
+      url: "mailto:kontakt@piotrcieslik.pl"
 
 footer:
   links:
