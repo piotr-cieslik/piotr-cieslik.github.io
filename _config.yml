@@ -20,7 +20,7 @@ analytics:
 markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes"
 locale: "pl-PL"
-
+minimal_mistakes_skin: "contrast"
 include: ["_pages"]
   
 plugins:
