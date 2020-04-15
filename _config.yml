@@ -9,8 +9,13 @@ url: "https://piotrcieslik.pl"
 repository: "piotr-cieslik/piotr-cieslik.github.io"
 search: true
 paginate: 5
-google_analytics: UA-160663764-1
 
+# Analytics
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-160663764-1"
+    
 # Build settings
 markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes"
