@@ -9,6 +9,7 @@ url: "https://piotrcieslik.pl"
 repository: "piotr-cieslik/piotr-cieslik.github.io"
 search: true
 paginate: 5
+paginate_path: /page:num/
 
 # Analytics
 analytics:
@@ -72,7 +73,3 @@ defaults:
       layout: single
       classes: wide
       author_profile: true
-
-
-
-
