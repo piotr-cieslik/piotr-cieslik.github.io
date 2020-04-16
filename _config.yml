@@ -1,9 +1,9 @@
 # Created based on https://github.com/mmistakes/mm-github-pages-starter/blob/master/_config.yml
 
 # Site settings
-title: "Ten o programowaniu"
+title: "Ten o programowaniu..."
 email: "kontakt@piotrcieslik.pl"
-description: ""
+description: "Blog programisty .NET"
 github_username: "piotr-cieslik"
 url: "https://piotrcieslik.pl"
 repository: "piotr-cieslik/piotr-cieslik.github.io"
@@ -34,7 +34,7 @@ plugins:
 author:
   name: "Piotr Cieślik"
 #  avatar: ""
-  bio: ""
+  bio: "Robotyk z wykształcenia, programista z wyboru. Od 2013 roku związany z technologią .NET."
   location: "Warszawa, Polska"
   links:
     - label: "GitHub"
