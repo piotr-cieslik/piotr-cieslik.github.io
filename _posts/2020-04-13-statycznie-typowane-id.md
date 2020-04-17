@@ -3,8 +3,7 @@ title: "Statycznie typowane Id"
 date: 2020-04-13
 ---
 
-## Wstęp
-Jedną z standardowych funkcjonalności aplikacji biznesowych jest przechowywanie danych. W programach tworzonych z wykorzystaniem języka C# bardzo często do przechowywania danych stosuje się kombinacje relacyjnej bazy danych (np. MS SQL) plus narzędzia ORM pozwalającego na mapowanie danych zawartych w bazie na obiekty (np. Entity Framework).
+Jedną z standardowych funkcjonalności aplikacji biznesowych jest przechowywanie danych. W programach tworzonych z wykorzystaniem języka C# bardzo często wykorzystuje się w tym celu kombinacje relacyjnej bazy danych (np. MS SQL) plus narzędzia ORM pozwalającego na mapowanie danych zawartych w bazie na obiekty (np. Entity Framework).
 
 Informacje zawarte w tym artykule bazują głównie na doświadczeniach wyniesionych z wykorzystania bazy danych MS SQL oraz biblioteki Entity Framework. Jestem jednak przekonany, że przedstawione tu podejście jest na tyle uniwersalne, że bez problemu sprawdzi się również w połączeniu z innymi technologiami.
 
