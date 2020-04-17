@@ -10,6 +10,7 @@ repository: "piotr-cieslik/piotr-cieslik.github.io"
 search: true
 paginate: 5
 paginate_path: /page:num/
+permalink: /:year/:title/
 
 # Analytics
 analytics:
