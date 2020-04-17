@@ -11,6 +11,6 @@ Oprócz samego pisania kodu interesuję mnie też sam proces wytwarzania oprogra
 
 Aktualnie pracuję samodzielnie jako tzw. Full Stack Developer tworząc aplikację webową dla firmy budowlanej oraz uczęszczam na studia podyplomowe Data Science na Politechnice Warszawskiej.
 
-Moim marzeniem jest stworzenie własnej firmy wytwarzającej oprogramowanie, w której programiści pracują bezpośrednio z klientem, bez szeroko pojętego "managementu" nad nimi.
+Moim marzeniem jest stworzenie własnej firmy wytwarzającej oprogramowanie, w której programiści pracują bezpośrednio z klientem, tak jak ma to miejsce w przypadku prawników lub księgowych.
 
 
