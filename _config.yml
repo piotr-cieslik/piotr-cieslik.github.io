@@ -11,13 +11,7 @@ search: true
 paginate: 5
 paginate_path: /page:num/
 permalink: /:year/:title/
-
-# Analytics
-analytics:
-  provider: "google-gtag"
-  google:
-    tracking_id: "UA-160663764-1"
-    
+  
 # Build settings
 markdown: kramdown
 remote_theme: "mmistakes/minimal-mistakes"
