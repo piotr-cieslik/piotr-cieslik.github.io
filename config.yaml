@@ -1,0 +1,29 @@
+baseURL: https://piotr-cieslik.github.io/
+title: PiotrCieslik.pl
+paginate: 5
+defaultContentLanguage: pl
+theme: PaperMod
+
+params:
+  title: Piotr Cieślik o programowaniu
+  homeInfoParams:
+    Title: Cześć!
+    Content: Jestem Piotr i od 2013 roku zajmuję się zawodowo programowaniem. Aktualnie pracuję jako full stack developer w technologiach asp.net core oraz react.js. Znajdziesz tu implementacje rozwiązań problemów, z którymi się zetknąłem, oraz moje przmyślenia na temat towrzenia oprogramowania.
+  socialIcons: # optional
+    - name: github
+      url: https://github.com/piotr-cieslik
+  ShowBreadCrumbs: true
+  comments: true
+
+menu:
+  main:
+    - name: Szukaj
+      url: search/
+      weight: 10
+
+# https://adityatelange.github.io/hugo-PaperMod/posts/papermod/papermod-features/#search-page
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON # is necessary
