@@ -13,6 +13,8 @@ params:
   socialIcons: # optional
     - name: github
       url: https://github.com/piotr-cieslik
+    - name: email
+      url: mailto:piotr.cieslik@outlook.com
   ShowBreadCrumbs: true
   comments: true
 
