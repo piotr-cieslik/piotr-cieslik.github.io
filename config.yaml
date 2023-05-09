@@ -3,6 +3,7 @@ title: PiotrCieslik.pl
 paginate: 5
 defaultContentLanguage: pl
 theme: PaperMod
+googleAnalytics: G-DQ1MYKCYXG
 
 params:
   title: Piotr Cieślik o programowaniu
