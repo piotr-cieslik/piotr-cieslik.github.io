@@ -4,6 +4,7 @@ paginate: 5
 defaultContentLanguage: pl
 theme: PaperMod
 googleAnalytics: G-DQ1MYKCYXG
+disqusShortname: piotrcieslik
 
 params:
   title: Piotr Cieślik o programowaniu

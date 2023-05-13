@@ -1,9 +1,7 @@
 ---
 title: "Generowanie własnego tokenu JWT w ASP.NET Core"
-date: 2023-05-12
+date: 2023-05-13
 tags: ["c#"]
-draft: true
-ShowWordCount: true
 ---
 
 Niedawno otrzymałem zadanie dodania REST API dla istniejącej już aplikacji ASP.NET MVC 5, którą na potrzeby tego wpisu nazywać będę aplikacją X. Zadanie nie wydawało się zbyt skomplikowane. Nowe API miało być osobną aplikacja, udostępnionym pod nowym adresem URL, która obsługiwać miała dziennie maksymalnie kilkaset zapytań.
