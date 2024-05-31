@@ -2,6 +2,7 @@
 title: "Statycznie typowane ID"
 date: 2020-04-13
 tags: ["c#"]
+draft: true
 ---
 
 Czy zdarzyło Ci się kiedyś przekazać do funkcji argumenty w złej kolejności? Jeśli pomyłka ta sposowuje podmianę imienia z nazwiskiem, to najprawdopodobniej nic złego się nie stanie. Istnieją jednak sytuacje, gdzie taka pomyłka może mieć katastrofalne skutki. Potrafię wybrazić sobie jak miło jest tłumaczyć się przed klientem, dlaczego widzi on dane nie swojej firmy, a co gorsza, czemu inna firma widzi jego dane.
