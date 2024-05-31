@@ -1,5 +1,5 @@
 baseURL: https://piotr-cieslik.github.io/
-title: piotrcieslik.pl
+title: Piotr Cieślik
 paginate: 5
 defaultContentLanguage: pl
 theme: PaperMod
@@ -7,10 +7,15 @@ googleAnalytics: G-DQ1MYKCYXG
 disqusShortname: piotrcieslik
 
 params:
-  title: Piotr Cieślik o programowaniu
+  title: Piotr Cieślik
   homeInfoParams:
-    Title: Cześć!
-    Content: Jestem Piotr i od 2013 roku zajmuję się zawodowo programowaniem. Aktualnie pracuję jako full stack developer w technologiach asp.net core oraz react.js. Znajdziesz tu implementacje rozwiązań problemów, z którymi się zetknąłem, oraz moje przmyślenia na temat towrzenia oprogramowania.
+    Title: Hi!
+    Content:
+      I'm Piotr, a software developer from Poland writing business application since 2013.
+      My favorite task is to simplify code as much as possile and even a bit more.
+      Less code means less bugs, less time to write and less time to read.
+      I like to cooperate with business people directly to understand their needs and deliver the best solution.
+
   socialIcons: # optional
     - name: github
       url: https://github.com/piotr-cieslik
