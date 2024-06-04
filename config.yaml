@@ -11,11 +11,11 @@ params:
   homeInfoParams:
     Title: Hi!
     Content:
-      I'm Piotr, a software developer from Poland writing business application since 2013.
-      My favorite task is to simplify code as much as possile and even a bit more.
-      Less code means less bugs, less time to write and less time to read.
-      I like to cooperate with business people directly to understand their needs and deliver the best solution.
-
+      I'm Piotr, a software developer from Poland, and I've been writing business applications since 2013.
+      My favorite task is simplifying code as much as possible, and even a bit more.
+      I enjoy working directly with business people to learn from them, understand their needs, and deliver the best solutions.
+      My favorite technologies are .NET Core and React.js. Recently,
+      I've been exploring the Microsoft Office 365 and Azure ecosystems to integrate my applications with them.
   socialIcons: # optional
     - name: github
       url: https://github.com/piotr-cieslik
